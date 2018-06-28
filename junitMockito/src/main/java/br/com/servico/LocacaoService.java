@@ -11,7 +11,12 @@ import br.com.utils.DataUtils;
 
 public class LocacaoService {
 
-	public Locacao alugarFilme(Usuario usuario, Filme filme) {
+	public Locacao alugarFilme(Usuario usuario, Filme filme) throws RuntimeException {
+		
+		if(filme.getEstoque() == 0 ) {
+			throw new RuntimeException("Sem estoque");
+		}
+		
 		Locacao locacao = new Locacao();
 		locacao.setFilme(filme);
 		locacao.setUsuario(usuario);
@@ -29,12 +34,6 @@ public class LocacaoService {
 	
 	@Test
 	public void teste() {
-		LocacaoService locacaoService = new LocacaoService();
 		
-		Filme filme = new Filme("Filme 1", 2, 5.0);
-		Usuario usuario = new Usuario("Usuario 1");
-		
-		Locacao locacao = locacaoService.alugarFilme(usuario, filme);
-		System.out.println();
 	}
 }
